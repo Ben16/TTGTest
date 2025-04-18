@@ -35,6 +35,8 @@ namespace KinematicCharacterController.Examples
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
+            RotateCharacterBasedOnCamera();
+
             HandleMovement();
         }
 
@@ -48,9 +50,12 @@ namespace KinematicCharacterController.Examples
             float moveHorizontal = Input.GetAxisRaw(MovementHorizontal);
             float moveVertical = Input.GetAxisRaw(MovementVertical);
 
-            Vector3 direction = new Vector3(moveHorizontal, 0, moveVertical);
+            Vector3 playerForward = Character.forward;
+            Vector3 playerRight = Vector3.Cross(Vector3.up, playerForward);
+            // Note that this is NOT normalized - it takes into account the amount of input on each axis
+            Vector3 movementDirection = playerForward * moveVertical + playerRight * moveHorizontal;
 
-            Character.position += direction * Time.deltaTime * Speed;
+            Character.position += movementDirection * Time.deltaTime * Speed;
         }
 
         private void HandleCameraInput()
@@ -79,6 +84,16 @@ namespace KinematicCharacterController.Examples
             if (Input.GetMouseButtonDown(1))
             {
                 CharacterCamera.TargetDistance = (CharacterCamera.TargetDistance == 0f) ? CharacterCamera.DefaultDistance : 0f;
+            }
+        }
+
+        private void RotateCharacterBasedOnCamera()
+        {
+            if(CharacterCamera != null)
+            {
+                // Rotate only around the Y Axis, so that the camera is directly behind the player
+                float cameraRotation = CharacterCamera.transform.rotation.eulerAngles.y;
+                Character.rotation = Quaternion.AngleAxis(cameraRotation, Vector3.up);
             }
         }
     }
