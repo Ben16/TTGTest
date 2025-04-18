@@ -8,6 +8,10 @@ namespace KinematicCharacterController.Examples
         public ExampleCharacterCamera CharacterCamera;
 
         public float Speed = 5.0f;
+        public float JumpInitialSpeed = 5.0f;
+        public float GroundedDistance = 1.0f; // How far to check to see if Character is grounded
+
+        private const float TraceFudge = 0.1f;
 
         private const string MouseXInput = "Mouse X";
         private const string MouseYInput = "Mouse Y";
@@ -15,6 +19,9 @@ namespace KinematicCharacterController.Examples
 
         private const string MovementHorizontal = "Horizontal";
         private const string MovementVertical = "Vertical";
+
+        protected Rigidbody CharacterRigidBody;
+        protected Collider CharacterCollider;
 
         private void Start()
         {
@@ -26,6 +33,9 @@ namespace KinematicCharacterController.Examples
             // Ignore the character's collider(s) for camera obstruction checks
             CharacterCamera.IgnoredColliders.Clear();
             CharacterCamera.IgnoredColliders.AddRange(Character.GetComponentsInChildren<Collider>());
+
+            CharacterRigidBody = Character.GetComponent<Rigidbody>();
+            CharacterCollider = Character.GetComponent<Collider>();
         }
 
         private void Update()
@@ -38,6 +48,8 @@ namespace KinematicCharacterController.Examples
             RotateCharacterBasedOnCamera();
 
             HandleMovement();
+
+            CheckJump();
         }
 
         private void LateUpdate()
@@ -95,6 +107,30 @@ namespace KinematicCharacterController.Examples
                 float cameraRotation = CharacterCamera.transform.rotation.eulerAngles.y;
                 Character.rotation = Quaternion.AngleAxis(cameraRotation, Vector3.up);
             }
+        }
+
+        private void CheckJump()
+        {
+            if(Input.GetButtonDown("Jump"))
+            {
+                if(IsGrounded())
+                {
+                    // Do the jump
+                    Vector3 JumpVelocity = new Vector3(0, JumpInitialSpeed, 0);
+                    CharacterRigidBody.AddForce(JumpVelocity, ForceMode.VelocityChange);
+                }
+                else
+                {
+                    Debug.Log("Not grounded");
+                }
+            }
+        }
+
+        private bool IsGrounded()
+        {
+            // Get position at bottom center of collision
+            Vector3 characterFeetPosition = new Vector3(CharacterCollider.bounds.center.x, CharacterCollider.bounds.min.y + TraceFudge, CharacterCollider.bounds.center.z);
+            return Physics.Raycast(characterFeetPosition, Vector3.down, GroundedDistance + TraceFudge);
         }
     }
 }

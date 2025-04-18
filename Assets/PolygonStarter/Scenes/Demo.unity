@@ -8265,8 +8265,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 461cd396e3fc7cc4eb9c92bde05c1b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 6505238199867825826}
+  Character: {fileID: 6505057340831361182}
   CharacterCamera: {fileID: 5530455799321397187}
+  Speed: 5
+  JumpInitialSpeed: 5
+  GroundedDistance: 2
 --- !u!4 &1004713170
 Transform:
   m_ObjectHideFlags: 0
@@ -17338,6 +17341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6505057340831361182}
   - component: {fileID: 6607685709280838954}
+  - component: {fileID: 6607685709280838955}
   m_Layer: 9
   m_Name: Character
   m_TagString: Untagged
@@ -17466,6 +17470,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &6607685709280838955
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6508550501183087756}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
