@@ -22,6 +22,7 @@ namespace KinematicCharacterController.Examples
 
         protected Rigidbody CharacterRigidBody;
         protected Collider CharacterCollider;
+        protected WeaponWielder CharacterWeaponWielder;
 
         private void Start()
         {
@@ -36,6 +37,7 @@ namespace KinematicCharacterController.Examples
 
             CharacterRigidBody = Character.GetComponent<Rigidbody>();
             CharacterCollider = Character.GetComponent<Collider>();
+            CharacterWeaponWielder = Character.GetComponent<WeaponWielder>();
         }
 
         private void Update()
@@ -43,6 +45,12 @@ namespace KinematicCharacterController.Examples
             if (Input.GetMouseButtonDown(0))
             {
                 Cursor.lockState = CursorLockMode.Locked;
+
+                //TODO check for 1p
+                if(CharacterCamera.TargetDistance == 0f)
+                {
+                    CharacterWeaponWielder.FireWeapon();
+                }
             }
 
             RotateCharacterBasedOnCamera();

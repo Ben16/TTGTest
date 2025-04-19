@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0461f4bce274c294baa8262d156ac9af, type: 3}
+  m_Name: BasicGun
+  m_EditorClassIdentifier: 
+  ProjectileLaunchSpeed: 20
+  ProjectileLifetime: 2
+  Mesh: {fileID: 4300000, guid: 27d85ed0b41b13e4b931011bd61b932b, type: 3}
+  Projectile: {fileID: 3379552004250304861, guid: 392664c0362be8d4b94ff03a2780805f, type: 3}
