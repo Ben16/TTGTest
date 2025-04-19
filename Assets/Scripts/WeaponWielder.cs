@@ -48,6 +48,8 @@ public class WeaponWielder : MonoBehaviour
         {
             projectile.SetSpawner(this);
 
+            projectile.SetDamage(CurrentWeapon.ProjectileDamage);
+
             // A lifetime <= 0 indicates the projectile should live indefinitely until it hits something
             if(CurrentWeapon.ProjectileLifetime > 0.0f)
             {

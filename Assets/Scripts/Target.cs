@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Target : Damageable
 {
-    // The Target is destroyed when shot
-    public override void OnDamaged()
+    protected override void OnDefeated()
     {
+        base.OnDefeated();
+        // Destroy the Target when it runs out of health
         Destroy(gameObject);
     }
 }

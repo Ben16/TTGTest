@@ -122,3 +122,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2682170a13cce5e47a6d5cdda4fe6441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 1
+  DamagedParticles: {fileID: 3159940772493343667, guid: 713d72af8978c1d4a901a151511eb1d2, type: 3}

@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
 {
     protected Rigidbody Rigidbody;
     protected WeaponWielder Spawner;
+    protected float Damage;
     protected IEnumerator DeathTimer;
 
     private Rigidbody GetCachedRigidbody()
@@ -37,6 +38,11 @@ public class Projectile : MonoBehaviour
         Spawner = spawner;
     }
 
+    public void SetDamage(float damage)
+    {
+        Damage = damage;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         // Don't allow collisions with whomever spawned this projectile
@@ -50,7 +56,13 @@ public class Projectile : MonoBehaviour
         Damageable damageableCollider = collision.gameObject.GetComponent<Damageable>();
         if(damageableCollider != null)
         {
-            damageableCollider.OnDamaged();
+            //Spawn any fx on hit
+            if(damageableCollider.DamagedParticles != null)
+            {
+                Instantiate(damageableCollider.DamagedParticles, transform.position, transform.rotation);
+            }
+
+            damageableCollider.ReceiveDamage(Damage);
         }
 
         // If the projectile hits anything (regardless of if it's damageable), destroy the projectile
