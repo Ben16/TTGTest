@@ -20,6 +20,7 @@ public class WeaponWielder : MonoBehaviour
 
     private void UpdateWeaponMesh()
     {
+        // Hide the weapon mesh if we have no weapon equipped
         if(CurrentWeapon == null)
         {
             WeaponMesh.mesh = null;
@@ -38,9 +39,8 @@ public class WeaponWielder : MonoBehaviour
             return;
         }
 
+        // Create the projectile
         GameObject projectileObject = Instantiate(CurrentWeapon.Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
-        // restore rotation from prefab
-        projectileObject.transform.rotation = CurrentWeapon.Projectile.transform.rotation * transform.rotation;
         
         // Now that the projecile is spawned, set various fields on it based on how the weapon's set up
         Projectile projectile = projectileObject.GetComponent<Projectile>();
@@ -48,11 +48,13 @@ public class WeaponWielder : MonoBehaviour
         {
             projectile.SetSpawner(this);
 
+            // A lifetime <= 0 indicates the projectile should live indefinitely until it hits something
             if(CurrentWeapon.ProjectileLifetime > 0.0f)
             {
                 projectile.StartLifetimeTimer(CurrentWeapon.ProjectileLifetime);
             }
 
+            // Point toward the target, with the desired velocity
             Vector3 normalizedDirection = Vector3.Normalize(aimTargetLocation - ProjectileSpawnPoint.position);
             Vector3 projectileInitialVelocity = normalizedDirection * CurrentWeapon.ProjectileLaunchSpeed;
             projectile.SetInitialVelocity(projectileInitialVelocity);

@@ -5,7 +5,6 @@ public class Coin : Collectable
     public int CoinValue = 1;
     public override void OnCollected(GameObject collector)
     {
-        // grant coint
         Inventory inventory = collector.GetComponent<Inventory>();
         if(inventory != null)
         {
@@ -14,6 +13,7 @@ public class Coin : Collectable
         base.OnCollected(collector);
     }
 
+    // Only objects with an inventory can pick up coins
     protected override bool CanInteractWith(GameObject other)
     {
         return other.GetComponent<Inventory>() != null;

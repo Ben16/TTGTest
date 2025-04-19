@@ -47,6 +47,7 @@ namespace KinematicCharacterController.Examples
             {
                 Cursor.lockState = CursorLockMode.Locked;
 
+                // Attempt firing the weapon if we are in first person
                 if(CharacterCamera.TargetDistance == 0f)
                 {
                     CharacterWeaponWielder.FireWeapon(CharacterCamera.GetCameraLookAtLocation(CameraTraceDistance));
@@ -113,6 +114,7 @@ namespace KinematicCharacterController.Examples
             {
                 // Rotate only around the Y Axis, so that the camera is directly behind the player
                 float cameraRotation = CharacterCamera.transform.rotation.eulerAngles.y;
+                // This overwrites any X or Z rotation, but we shouldn't have that anyways
                 Character.rotation = Quaternion.AngleAxis(cameraRotation, Vector3.up);
             }
         }
