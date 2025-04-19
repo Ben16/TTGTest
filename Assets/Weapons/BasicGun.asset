@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BasicGun
   m_EditorClassIdentifier: 
   ProjectileLaunchSpeed: 20
-  ProjectileLifetime: 2
+  ProjectileLifetime: 1
   Mesh: {fileID: 4300000, guid: 27d85ed0b41b13e4b931011bd61b932b, type: 3}
   Projectile: {fileID: 3379552004250304861, guid: 392664c0362be8d4b94ff03a2780805f, type: 3}

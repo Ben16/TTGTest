@@ -175,5 +175,20 @@ namespace KinematicCharacterController.Examples
                 Transform.position = targetPosition;
             }
         }
+
+        public Vector3 GetCameraLookAtLocation(float CameraTraceDistance)
+        {
+            // Find what the camera is looking at
+            RaycastHit hit;
+            Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, CameraTraceDistance))
+            {
+                return hit.transform.position;
+            }
+
+            // If the camera is looking into the distance, just pick a point CameraTraceDistance away
+            return ray.GetPoint(CameraTraceDistance);
+        }
     }
 }

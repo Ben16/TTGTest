@@ -30,7 +30,7 @@ public class WeaponWielder : MonoBehaviour
         }
     }
 
-    public void FireWeapon()
+    public void FireWeapon(Vector3 aimTargetLocation)
     {
         if(CurrentWeapon == null)
         {
@@ -41,15 +41,20 @@ public class WeaponWielder : MonoBehaviour
         GameObject projectileObject = Instantiate(CurrentWeapon.Projectile, ProjectileSpawnPoint.position, ProjectileSpawnPoint.rotation);
         // restore rotation from prefab
         projectileObject.transform.rotation = CurrentWeapon.Projectile.transform.rotation * transform.rotation;
+        
+        // Now that the projecile is spawned, set various fields on it based on how the weapon's set up
         Projectile projectile = projectileObject.GetComponent<Projectile>();
         if(projectile != null)
         {
+            projectile.SetSpawner(this);
+
             if(CurrentWeapon.ProjectileLifetime > 0.0f)
             {
                 projectile.StartLifetimeTimer(CurrentWeapon.ProjectileLifetime);
             }
-            //TODO this need to be based off where the player is looking
-            Vector3 projectileInitialVelocity = ProjectileSpawnPoint.forward * CurrentWeapon.ProjectileLaunchSpeed;
+
+            Vector3 normalizedDirection = Vector3.Normalize(aimTargetLocation - ProjectileSpawnPoint.position);
+            Vector3 projectileInitialVelocity = normalizedDirection * CurrentWeapon.ProjectileLaunchSpeed;
             projectile.SetInitialVelocity(projectileInitialVelocity);
         }
     }

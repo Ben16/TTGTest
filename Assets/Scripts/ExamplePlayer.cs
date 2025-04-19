@@ -12,6 +12,7 @@ namespace KinematicCharacterController.Examples
         public float GroundedDistance = 1.0f; // How far to check to see if Character is grounded
 
         private const float TraceFudge = 0.1f;
+        private const float CameraTraceDistance = 1000.0f;
 
         private const string MouseXInput = "Mouse X";
         private const string MouseYInput = "Mouse Y";
@@ -46,10 +47,9 @@ namespace KinematicCharacterController.Examples
             {
                 Cursor.lockState = CursorLockMode.Locked;
 
-                //TODO check for 1p
                 if(CharacterCamera.TargetDistance == 0f)
                 {
-                    CharacterWeaponWielder.FireWeapon();
+                    CharacterWeaponWielder.FireWeapon(CharacterCamera.GetCameraLookAtLocation(CameraTraceDistance));
                 }
             }
 
