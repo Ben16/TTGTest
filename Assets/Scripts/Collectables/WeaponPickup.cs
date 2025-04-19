@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WeaponPickup : Collectable
+public class WeaponPickup : Collectible
 {
     public Weapon Weapon;
     public override void OnCollected(GameObject collector)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Coin : Collectable
+public class Coin : Collectible
 {
     public int CoinValue = 1;
     public override void OnCollected(GameObject collector)
