@@ -1,6 +1,6 @@
 Ben Fickes - Tic Toc Games Test Submission
 
-Implementation Approach:
+# Implementation Approach
 
 I started with movement. I first got the player moving with no regards to camera direction, then reworked it to be the current implementation: forward vs. side to side.
 I added jumping next. Most of the work here was checking if the player was grounded or not.
@@ -17,7 +17,7 @@ I then made Damageables (which I made Target a child class of). At first, all I 
 Lastly, I implemented aiming funcitonality and restricted firing to being while in 1p. I simply traced from the camera for a target, or used a position a certain distance along the camera ray if it wasn't looking at a collidable object.
 The Projectile is simply spawned from the weapon toward the aim point.
 
-Assumptions:
+# Assumptions
 
 I tried to keep my assumptions to a minimum. For example, a player could theoretically shoot another player, enemies could wander through coins without picking them up, and targets coul have more health.
 
